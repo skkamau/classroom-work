@@ -1,2 +1,0 @@
-# classroom-work
-classroom assignment
