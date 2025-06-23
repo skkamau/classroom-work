@@ -1,17 +1,17 @@
 body {
     font-family: 'Segoe UI', Arial, sans-serif;
-    background: linear-gradient(120deg, #232526 0%, #414345 100%);
-    color: #e0e0e0;
+    background: #fff;
+    color: #181818;
     margin: 0;
     padding: 0;
     min-height: 100vh;
 }
 
 .header {
-    background: #111;
+    background: #181818;
     color: #fff;
     padding: 40px 0 20px 0;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.25);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
     margin-bottom: 30px;
 }
 
@@ -26,23 +26,29 @@ h1 {
 nav {
     text-align: center;
     margin-bottom: 30px;
-    background: #232526;
+    background: #fff;
     padding: 15px 0;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.18);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    border-bottom: 2px solid #181818;
 }
 
 nav a {
     text-decoration: none;
-    color: #e0e0e0;
+    color: #181818;
     margin: 0 18px;
     font-weight: 600;
     font-size: 1.1rem;
-    transition: color 0.2s;
+    transition: color 0.2s, background 0.2s;
+    padding-bottom: 3px;
+    border-bottom: 2px solid transparent;
 }
 
 nav a:hover {
-    color: #ffd700;
-    text-decoration: underline;
+    color: #fff;
+    background: #181818;
+    border-radius: 3px;
+    border-bottom: 2px solid #181818;
+    padding: 3px 8px;
 }
 
 .lead-container {
@@ -76,23 +82,24 @@ nav a:hover {
     height: 100%;
     backface-visibility: hidden;
     border-radius: 12px;
-    box-shadow: 0 4px 24px rgba(0,0,0,0.25);
-    background: #232526;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.15);
+    background: #fff;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     padding: 28px;
-    color: #e0e0e0;
+    color: #181818;
 }
 
 .flip-card-front {
     z-index: 2;
+    background: #fff;
 }
 
 .flip-card-back {
     transform: rotateY(180deg);
-    background: #333;
+    background: #181818;
     color: #fff;
 }
 
@@ -105,19 +112,19 @@ nav a:hover {
 }
 
 .card {
-    background: #232526;
+    background: #fff;
     border-radius: 10px;
-    box-shadow: 0 2px 12px rgba(0,0,0,0.25);
+    box-shadow: 0 2px 12px rgba(0,0,0,0.10);
     padding: 24px 32px;
     text-align: center;
     width: 220px;
     transition: transform 0.2s, box-shadow 0.2s;
-    color: #e0e0e0;
+    color: #181818;
 }
 
 .card:hover {
     transform: translateY(-8px) scale(1.03);
-    box-shadow: 0 8px 24px rgba(255,215,0,0.10);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.13);
 }
 
 .card img {
@@ -126,18 +133,18 @@ nav a:hover {
     object-fit: cover;
     border-radius: 50%;
     margin-bottom: 14px;
-    border: 2px solid #ffd700;
-    background: #111;
+    border: 2px solid #181818;
+    background: #fff;
 }
 
 .card h2 {
     margin: 12px 0 6px 0;
     font-size: 1.2rem;
-    color: #ffd700;
+    color: #181818;
 }
 
 .card p {
-    color: #ccc;
+    color: #444;
     font-size: 1rem;
     margin: 0;
 }
@@ -146,13 +153,13 @@ table {
     width: 85%;
     margin: 30px auto;
     border-collapse: collapse;
-    background-color: #232526;
-    box-shadow: 0 2px 12px rgba(0,0,0,0.18);
-    color: #e0e0e0;
+    background-color: #fff;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.10);
+    color: #181818;
 }
 
 table, th, td {
-    border: 1px solid #444;
+    border: 1px solid #222;
 }
 
 th, td {
@@ -161,8 +168,8 @@ th, td {
 }
 
 th {
-    background: #333;
-    color: #ffd700;
+    background: #181818;
+    color: #fff;
     font-weight: 600;
 }
 
@@ -170,11 +177,11 @@ form {
     width: 340px;
     margin: 40px auto;
     padding: 28px 32px;
-    background-color: #232526;
-    border: 1px solid #444;
+    background-color: #fff;
+    border: 1px solid #222;
     border-radius: 8px;
-    box-shadow: 0 2px 12px rgba(0,0,0,0.18);
-    color: #e0e0e0;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.10);
+    color: #181818;
 }
 
 input[type="text"],
@@ -184,24 +191,24 @@ textarea {
     padding: 12px;
     margin-top: 8px;
     margin-bottom: 18px;
-    border: 1px solid #444;
+    border: 1px solid #222;
     border-radius: 5px;
     font-size: 1rem;
-    background: #333;
-    color: #fff;
+    background: #fff;
+    color: #181818;
     transition: border 0.2s;
 }
 
 input[type="text"]:focus,
 input[type="email"]:focus,
 textarea:focus {
-    border: 1.5px solid #ffd700;
+    border: 1.5px solid #181818;
     outline: none;
 }
 
 input[type="submit"] {
-    background-color: #ffd700;
-    color: #232526;
+    background-color: #181818;
+    color: #fff;
     border: none;
     padding: 12px 0;
     width: 100%;
@@ -214,6 +221,15 @@ input[type="submit"] {
 
 input[type="submit"]:hover {
     background-color: #fff;
-    color: #232526;
+    color: #181818;
+    border: 1px solid #181818;
 }
-
+<body>
+<p id="demo">total</p>
+<script>
+    const price = 6;
+    const item = 5;
+    let total = price * item;
+    document.getElementById("demo").innerText = "Total: " + total;
+</script>
+</body>
