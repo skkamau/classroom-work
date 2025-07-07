@@ -6,8 +6,8 @@
   <link rel="stylesheet" href="csslab.css">
   <style>
     .login-box {
-      max-width: 380px;
-      margin: 80px auto 0 auto;
+      max-width: 400px;
+      margin: 60px auto 0 auto;
       background: linear-gradient(135deg, #232526 70%, #111 100%);
       border-radius: 14px;
       box-shadow: 0 4px 24px rgba(0,0,0,0.35);
@@ -15,17 +15,6 @@
       color: #e0e0e0;
       position: relative;
       overflow: hidden;
-    }
-    .login-box::before {
-      content: "";
-      position: absolute;
-      top: -40px;
-      right: -40px;
-      width: 120px;
-      height: 120px;
-      background: rgba(255,215,0,0.07);
-      border-radius: 50%;
-      z-index: 0;
     }
     .login-box h2 {
       text-align: center;
@@ -45,28 +34,28 @@
       z-index: 1;
       position: relative;
     }
-    .login-box input[type="text"],
-    .login-box input[type="password"] {
+    .login-box input,
+    .login-box select {
       width: 100%;
       padding: 13px;
-      margin-bottom: 20px;
+      margin-bottom: 18px;
       border: 1.5px solid #444;
       border-radius: 6px;
       font-size: 1.05rem;
       background: #232526;
-      color: #000000;
+      color: #e0e0e0;
       transition: border 0.2s, background 0.2s;
       z-index: 1;
       position: relative;
     }
-    .login-box input[type="text"]:focus,
-    .login-box input[type="password"]:focus {
-      border: 1.5px solid #0d0d0d;
+    .login-box input:focus,
+    .login-box select:focus {
+      border: 1.5px solid #000000;
       background: #333;
       outline: none;
     }
     .login-box input[type="submit"] {
-      background: linear-gradient(90deg, #ffd700 60%, #bfa100 100%);
+      background: linear-gradient(90deg, #000000 60%, #000000 100%);
       color: #232526;
       border: none;
       padding: 13px 0;
@@ -89,7 +78,7 @@
       display: block;
       text-align: center;
       margin-top: 22px;
-      color: #ffd700;
+      color: #000000;
       text-decoration: none;
       font-size: 1rem;
       z-index: 1;
@@ -100,40 +89,116 @@
       color: #fff;
       text-decoration: underline;
     }
-    .login-box .logo {
-      display: block;
-      margin: 0 auto 18px auto;
-      width: 54px;
-      height: 54px;
-      border-radius: 50%;
-      background: #ffd700;
-      box-shadow: 0 2px 8px rgba(255,215,0,0.15);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 2rem;
-      color: #232526;
-      font-weight: bold;
-      letter-spacing: 1px;
-      z-index: 1;
-      position: relative;
+    .error-message {
+      color: #ff4d4d;
+      font-size: 0.98rem;
+      margin-bottom: 10px;
+      text-align: center;
+      min-height: 18px;
     }
   </style>
 </head>
 <body>
   <div class="login-box">
-    <div class="logo">SKM</div>
-    <h2>Member Login</h2>
-    <form>
-      <label for="login-username">Username</label>
-      <input type="text" id="login-username" name="username" autocomplete="username">
+    <h2>Register Account</h2>
+    <form id="registerForm" autocomplete="off">
+      <label for="userType">User Account</label>
+      <select id="userType" name="userType" required>
+        <option value="">Select account type</option>
+        <option value="customer">Customer</option>
+        <option value="dealer">Dealer</option>
+        <option value="admin">Admin</option>
+      </select>
 
-      <label for="login-password">Password</label>
-      <input type="password" id="login-password" name="password" autocomplete="current-password">
+      <label for="username">Username</label>
+      <input type="text" id="username" name="username" pattern="^[A-Za-z]+$" title="Only alphabetic characters, no spaces or numbers" required>
 
-      <input type="submit" value="Login">
+      <label for="dob">Date of Birth</label>
+      <input type="date" id="dob" name="dob" required>
+
+      <label for="password">Password</label>
+      <input type="password" id="password" name="password" required
+        pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$"
+        title="At least 8 characters, uppercase, lowercase, number, and special character">
+
+      <label for="confirmPassword">Confirm Password</label>
+      <input type="password" id="confirmPassword" name="confirmPassword" required>
+
+      <div class="error-message" id="errorMsg"></div>
+      <input type="submit" value="Register">
     </form>
-    <a class="signup-link" href="#">New here? Create an account</a>
+    <a class="signup-link" href="#">Already have an account? Login</a>
   </div>
+  <script>
+  function calculateAge(dob) {
+    const birthDate = new Date(dob);
+    const today = new Date();
+    let age = today.getFullYear() - birthDate.getFullYear();
+    const m = today.getMonth() - birthDate.getMonth();
+    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+      age--;
+    }
+    return age;
+  }
+
+  document.getElementById('registerForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const errorMsg = document.getElementById('errorMsg');
+    errorMsg.textContent = "";
+
+    // Username validation
+    const username = document.getElementById('username').value.trim();
+    if (!/^[A-Za-z]+$/.test(username)) {
+      errorMsg.textContent = "Username must only contain alphabetic characters (no spaces or numbers).";
+      return;
+    }
+
+    // Age validation
+    const dob = document.getElementById('dob').value;
+    if (!dob || calculateAge(dob) < 18) {
+      errorMsg.textContent = "You must be at least 18 years old to register.";
+      return;
+    }
+
+    // Password strength validation
+    const password = document.getElementById('password').value;
+    if (!/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/.test(password)) {
+      errorMsg.textContent = "Password must be at least 8 characters and include uppercase, lowercase, number, and special character.";
+      return;
+    }
+
+    // Confirm password match
+    const confirmPassword = document.getElementById('confirmPassword').value;
+    if (password !== confirmPassword) {
+      errorMsg.textContent = "Passwords do not match.";
+      return;
+    }
+
+    // User type selection
+    const userType = document.getElementById('userType').value;
+    if (!userType) {
+      errorMsg.textContent = "Please select a user account type.";
+      return;
+    }
+
+    // If all validations pass
+    errorMsg.style.color = "#00e676";
+    errorMsg.textContent = "Registration successful!";
+
+    // Show dialog box based on user type
+    let userTypeText = "";
+    if (userType === "customer") userTypeText = "Customer";
+    else if (userType === "dealer") userTypeText = "Dealer";
+    else if (userType === "admin") userTypeText = "Admin";
+    else userTypeText = userType;
+
+    setTimeout(() => {
+      alert("You have successfully registered as " + userTypeText + "!");
+      document.getElementById('registerForm').reset();
+      errorMsg.textContent = "";
+      errorMsg.style.color = "#ff4d4d";
+    }, 800);
+  });
+</script>
 </body>
 </html>
